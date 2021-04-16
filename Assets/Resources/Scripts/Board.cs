@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    private Dictionary<int, Sprite> white_board, black_board;
+
     // Start is called before the first frame update
     void Start()
     {
-        CreateBoard(true);
+        bool isPlayerWhite = false;
+
+        InitializeBoard(isPlayerWhite);
     }
 
-    void CreateBoard(bool isPlayerWhite)
+    void InitializeBoard(bool isPlayerWhite)
     {
-        string boardToDisable = "WhiteBoard";
+        string board_to_disable_tag = isPlayerWhite ? "BlackBoard" : "WhiteBoard";
 
-        if (isPlayerWhite)
-        {
-            boardToDisable = "BlackBoard";
-        }
 
         foreach (Transform child in this.transform)
         {
-            if (child.tag == boardToDisable)
+            if (child.tag == board_to_disable_tag)
             {
                 child.gameObject.SetActive(false);
             }
         }
-
     }
 }
